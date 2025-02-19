@@ -24,7 +24,7 @@ def reverse_linked_list(head):
 def to_list(head):
     lst = []
     while head:
-        lst.append(head.data)
+        lst.insert(0, head.data)
         head = head.next
     return lst
 
