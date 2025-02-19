@@ -6,6 +6,10 @@ class Node:
     def __eq__(self, other):
         return self.data == other.data and self.next == other.next
 
+    def __repr__(self):
+        return repr(to_list(self))
+        
+
 def reverse_linked_list(head):
     prev = None
     curr = head
@@ -16,3 +20,16 @@ def reverse_linked_list(head):
         curr = next_node
         
     return prev
+
+def to_list(head):
+    lst = []
+    while head:
+        lst.append(head.data)
+        head = head.next
+    return lst
+
+def from_list(lst):
+    head = None
+    for i in lst:
+        head = Node(i, head)
+    return head
