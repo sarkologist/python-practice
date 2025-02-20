@@ -7,7 +7,7 @@ class Node:
         return self.data == other.data and self.next == other.next
 
     def __repr__(self):
-        return repr(self.to_list())
+        return repr(to_list(self))
         
     @classmethod
     def from_list(self, lst):
@@ -16,13 +16,12 @@ class Node:
             head = Node(i, head)
         return head
 
-    def to_list(self):
-        head = self
-        lst = []
-        while head:
-            lst.append(head.data)
-            head = head.next
-        return lst
+def to_list(head):
+    lst = []
+    while head:
+        lst.append(head.data)
+        head = head.next
+    return lst
 
 def reverse_linked_list(head):
     prev = None

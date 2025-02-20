@@ -1,5 +1,5 @@
 import pytest
-from src.reverse_linked_list import reverse_linked_list, Node
+from src.reverse_linked_list import reverse_linked_list, Node, to_list
 
 from hypothesis import given, strategies as st
 
@@ -21,14 +21,11 @@ def test_double_reversal(lst):
 
 @given(linked_list(st.integers())())
 def test_to_from_linked_list(lst):
-    assert Node.from_list(lst.to_list() if lst else []) == lst
+    assert Node.from_list(to_list(lst) if lst else []) == lst
 
 @given(st.lists(st.integers()))
 def test_from_to_linked_list(lst):
-    if lst:
-        assert Node.from_list(lst).to_list() == lst
-    else:
-        assert Node.from_list(lst) == None
+    assert to_list(Node.from_list(lst)) == lst
 
 @given(st.lists(st.integers()))
 def test_to_list_respects_reverse(lst):
@@ -36,6 +33,5 @@ def test_to_list_respects_reverse(lst):
 
 @given(linked_list(st.integers())())
 def test_from_list_respects_reverse(lst):
-    if lst:
-        as_list = lst.to_list()
-        assert reverse_linked_list(lst).to_list() == as_list[::-1]
+    as_list = to_list(lst)
+    assert to_list(reverse_linked_list(lst)) == as_list[::-1]
