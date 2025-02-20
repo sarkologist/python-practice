@@ -29,3 +29,13 @@ def test_from_to_linked_list(lst):
         assert Node.from_list(lst).to_list() == lst
     else:
         assert Node.from_list(lst) == None
+
+@given(st.lists(st.integers()))
+def test_to_list_respects_reverse(lst):
+    assert not lst or Node.from_list(lst[::-1]) == reverse_linked_list(Node.from_list(lst))
+
+@given(linked_list(st.integers())())
+def test_from_list_respects_reverse(lst):
+    if lst:
+        as_list = lst.to_list()
+        assert reverse_linked_list(lst).to_list() == as_list[::-1]
